@@ -1,0 +1,7 @@
+C:\Users\clgag\source\repos\ComicViewer\ComicViewer\obj\Debug\ComicViewer.csproj.CoreCompileInputs.cache
+C:\Users\clgag\source\repos\ComicViewer\ComicViewer\bin\ComicViewer.dll.config
+C:\Users\clgag\source\repos\ComicViewer\ComicViewer\bin\ComicViewer.dll
+C:\Users\clgag\source\repos\ComicViewer\ComicViewer\bin\ComicViewer.pdb
+C:\Users\clgag\source\repos\ComicViewer\ComicViewer\obj\Debug\ComicViewer.dll
+C:\Users\clgag\source\repos\ComicViewer\ComicViewer\obj\Debug\ComicViewer.pdb
+C:\Users\clgag\source\repos\ComicViewer\ComicViewer\obj\Debug\ComicViewer.csprojAssemblyReference.cache
