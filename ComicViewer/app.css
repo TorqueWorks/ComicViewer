@@ -5,3 +5,24 @@
 span {
     font-style: italic;
 }
+
+.date {
+    text-align: center;
+    font-weight: bold;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.comic {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30px;
+}
+
+.alttext {
+    text-align: center;
+}

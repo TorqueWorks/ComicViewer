@@ -30,19 +30,16 @@ window.onload = () => {
  * @param {any} n The number of comics to display (will always display at least 1)
  */
 function getLastNComics(n) {
-    //Create the first cell (we'll always have at least one)
-    createComicCells("1");
     //Do our initial call. This one is special because we use this to get the current comic number
     //which is then used to determine the rest of the comics to load
     $.getJSON(xkcdAPI)
         .done(function (data) {
             //Set the first comic img here - no reason to duplicate the call below
-            setComicData(data, 1);
+            createComicSlide(data);
             //Fetch the rest of the comics after creating the cell to hold that comic.
             var i = 1;
             while (++i <= n) {
-                createComicCells(i);
-                getAndSetComicData(parseInt(data.num) - (i - 1), i);
+                getAndCreateComicSlide(parseInt(data.num) - (i - 1));
             }
             
         });
@@ -52,25 +49,43 @@ function getLastNComics(n) {
 /**
  * Gets the comic metadata for the id specified and sets the elements with the appropriate data (img src, text, etc)
  * @param {any} id The ID of the comic itself (i.e. 1000)
- * @param {any} targetIndex The target index to use for selecting the elements
  */
-function getAndSetComicData(index, targetId) {
+function getAndCreateComicSlide(id) {
     $.getJSON(xkcdAPI + "/" + id)
         .done(function (data) {
-            setComicData(data, targetIndex);
+            createComicSlide(data);
         });
 }
 
-/**
- * Creates the cells for holding the comic data (img, alt-text, etc)
- * @param {any} index The index to use for this set of cells
- */
-function createComicCells(index) {
-    $("#comics").append("<td><img id='comic" + index + "' /></td>");
-    $("#alt-text").append("<td id='alttext" + index + "' />");
-}
+function createComicSlide(data) {
+    var carousel = document.getElementById("comic-carousel");
 
-function setComicData(data, id) {
-    $("#comic" + id).attr("src", data.img);
-    $("#alttext" + id).text(data.alt);
+    //Overall item div
+    var itemDiv = document.createElement("div");
+    itemDiv.className = "item" + (carousel.childElementCount === 0 ? " active" : "");
+
+    //Date header
+    var date = document.createElement("h2");
+    date.className = "date";
+    date.innerText = data.month + "/" + data.day + "/" + data.year;
+
+    var title = document.createElement("h2");
+    title.className = "title";
+    title.innerText = data.title;
+
+    //Comic image
+    var img = document.createElement("img");
+    img.className = "comic";
+    img.src = data.img;
+
+    //alt-text footer
+    var caption = document.createElement("p");
+    caption.className = "alttext";
+    caption.innerText = data.alt;
+
+    itemDiv.appendChild(title);
+    itemDiv.appendChild(date);
+    itemDiv.appendChild(img);
+    itemDiv.appendChild(caption);
+    document.getElementById("comic-carousel").appendChild(itemDiv);
 }
